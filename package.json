@@ -1,6 +1,6 @@
 {
-  "engine":{
-    "node":"20.18.0"
+  "engines": {
+    "node": "20.18.0"
   },
   "name": "major-project-fullstack",
   "version": "1.0.0",
