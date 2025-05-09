@@ -72,14 +72,23 @@ module.exports.renderEditForm=async (req,res)=>{
 
 module.exports.updateListing=async (req,res)=>{
     let {id}=req.params;
-    let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});//it will give listing before updation
+
+    const location=req.body.listing.location;// to take out updated location from edit file
+    // console.log(location);
+    const coords=await geocodeLocation(location);
 
     if(typeof req.file!="undefined"){
         let url=req.file.path;
         let filename=req.file.filename;
         listing.image={url,filename};
-        await listing.save();
     }
+    listing.geometry={
+        type:"Point",
+        coordinates:coords,
+    };
+    let savedListing=await listing.save();
+    // console.log(savedListing);
 
     req.flash("success","Listing Updated!");
     res.redirect(`/listings/${id}`);

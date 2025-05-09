@@ -1,5 +1,8 @@
-console.log(address);
+console.log(coordinates[1],coordinates[0]);
 var map = L.map('map').setView([coordinates[1],coordinates[0]], 9);//[latitude,longitude],zoom
+
+// console.log("Coordinates:", coordinates);
+// console.log("Address:", address);
 
 // Add OpenStreetMap tiles
 //NON SATELLITE ONE
